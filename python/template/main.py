@@ -3,9 +3,6 @@ from typing import List, Dict, Tuple
 
 # ------------------------
 # を返却
-# 1 ≦ a ≦ 5
-# 1 ≦ b ≦ 5
-# a ≠ b
 # ------------------------
 def get_answer(n: int, a: int, b: int) -> int:
     dp = [0] * (n + 1)
