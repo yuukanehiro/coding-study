@@ -1,6 +1,7 @@
 
 def get_answer(n: int, a: int, b: int) -> int:
-    dp = [0] * (n + 1)
+    # 最小値を求めたいので非常に大きい数を入れておく
+    dp = [10000000] * (n + 1)
 
     # 1個の時はa
     dp[1] = a
