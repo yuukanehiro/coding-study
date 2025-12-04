@@ -1,137 +1,92 @@
-import sys
-import unittest
 from collections import defaultdict
 from typing import List, Dict, Tuple
 
 # ------------------------
 # を返却
+# 1 ≦ a ≦ 5
+# 1 ≦ b ≦ 5
+# a ≠ b
 # ------------------------
-# def get_item_price_map(items: List[str]) -> Dict[str, int]:
-#     item_price_map: Dict[str, int] = {}
-#     for line in items:
-#         name, price = line.split()
-#         item_price_map[name] = int(price)
-#     return item_price_map
+def get_answer(n: int, a: int, b: int) -> int:
+    dp = [0] * (n + 1)
 
-# ------------------------
-# テスト用コード（unittest）
-# ------------------------
-# class TestItemPriceMap(unittest.TestCase):
-#     def test_get_item_price_map(self):
-#         expected = {"eraser": 50, "pencil": 30}
-#         actual = get_item_price_map(["eraser 50", "pencil 30"])
-#         self.assertEqual(expected, actual)
+    # 0段の時は1通り
+    dp[0] = 1
 
-# ------------------------
-# main()
-# 起動時分岐
-# ------------------------
+    for i in range(1, n + 1):
+        if i >= a:
+            dp[i] += dp[i - a]
+        if i >= b:
+            dp[i] += dp[i - b]  
+
+    return dp[n]
+
+
 def main():
-    item_count, query_count = map(int, input().split())
-    # item_count = int(input()) # 1つのintの場合
+    # item_count, query_count = map(int, input().split())
+    # n = int(input()) # 1つのintの場合
     # inputList = list(map(int, input().split()))
     # item_count, query_count = inputList[0], inputList[1]
-    items = [input().strip() for _ in range(item_count)]
+    # items = [input().strip() for _ in range(item_count)]
     # 2次元配列
     # items = [list(map(int, input().split())) for _ in range(item_count)]
     # 1 - indexed
     # items = [0] + [int(input().strip()) for _ in range(item_count)]
-    queries = [input().strip() for _ in range(query_count)]
+    # queries = [input().strip() for _ in range(query_count)]
     # queries: Dict[int, str] = {int(line.split()[0]): line.split()[1] for line in (input().strip() for _ in range(query_count))}
     # queries: List[Tuple[int, str]] = [(int(line.split()[0]), line.split()[1]) for line in (input().strip() for _ in range(query_count))]
 
-    item_price_map = get_item_price_map(items)
+    n, a, b = map(int, input().split())
 
-    for item in queries:
-        print(item_price_map.get(item, -1))
+    print(get_answer(n, a, b))
+
+
+answer1 = 3
+assert get_answer(11,3,4) == answer1
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == "test":
-        unittest.main(argv=sys.argv[:1])
-    else:
-        main()
-
-# テストを実行する場合
-# % python3 template.py test
-# .
-# ----------------------------------------------------------------------
-# Ran 1 test in 0.000s
-
-# OK
-
-# 通常の実行
-# % python3 template.py
-
-# Input:
-# eraser 50
-# pencil 30
-# book 100
-# book
-# eraser
-# pencil
-# margaret
-
-# Output:
-# 100
-# 50
-# 30
-# -1
+    main()
 
 # Q
-# 下記の問題をプログラミングしてみよう！
-# paiza 商店では N 個の商品が売られており、i 番目の商品の名前は A_i で、価格は B_i です。
-# あなたは M 個の商品名が書かれたお買い物リスト S を持っています。リストに書かれているそれぞれの商品について、paiza 商店での価格を出力してください。リストには paiza 商店が扱っていない商品も書かれている可能性がありますが、その場合は価格の代わりに -1 を出力してください。
+# 階段の上り方 2 Python3編（paizaランク B 相当）
+# 問題にチャレンジして、ユーザー同士で解答を教え合ったり、コードを公開してみよう！
+
+# シェア用URL:
+# https://paiza.jp/works/mondai/dp_primer/dp_primer_stairs_step1
+# 問題文のURLをコピーする
+#  下記の問題をプログラミングしてみよう！
+# 整数 n, a, b が与えられます。
+# 階段を上るのに、1歩で a 段または b 段を上ることができるとき、n 段の階段を上る方法は何通りあるでしょうか。
+
+# (ヒント)
+# 前問とやることは同じです。ただ、n, a, b の値によっては答えが0になることがあるので注意しましょう。例えば、n = 4, a = 3, b = 5 のとき、答えは0です。(1歩で3段か5段上ることができるとき、ちょうど4段の階段を上る方法は存在しない)
 
 # ▼　下記解答欄にコードを記入してみよう
 
 # 入力される値
-# N M
-# A_1 B_1
-# A_2 B_2
-# ...
-# A_N B_N
-# S_1
-# S_2
-# ...
-# S_M
+# n a b
 
 # 入力値最終行の末尾に改行が１つ入ります。
 # 文字列は標準入力から渡されます。 標準入力からの値取得方法はこちらをご確認ください
 # 期待する出力
-# M 行出力してください。i 行目には、商品 S_i の価格 T_i を出力してください。paiza 商店に商品 S_i が売られていない場合は価格の代わりに -1 を出力してください。
+# n 段の階段を上る方法の数を1行に出力してください。
 
+# また、末尾に改行を入れ、余計な文字、空行を含んではいけません。
 
-# T_1
-# T_2
-# ...
-# T_M
-
-
-# 末尾に改行を入れ、余計な文字、空行を含んではいけません。
 # 条件
 # すべてのテストケースにおいて、以下の条件をみたします。
 
-# ・ 1 ≦ N ≦ 100
-# ・ 1 ≦ M ≦ 100
-# ・ A_i は英子文字からなる1文字以上10文字以下の文字列 (1 ≦ i ≦ N)
-# ・ i ≠ j ならば A_i ≠ A_j
-# ・ 1 ≦ B_i ≦ 100 (1 ≦ i ≦ N)
-# ・ S_i は英子文字からなる1文字以上10文字以下の文字列 (1 ≦ i ≦ N)
-# ・ i ≠ j ならば S_i ≠ S_j
+# ・ 1 ≦ n ≦ 40
+
+# ・ 1 ≦ a ≦ 5
+
+# ・ 1 ≦ b ≦ 5
+
+# ・ a ≠ b
 
 # 入力例1
-# 3 4
-# eraser 50
-# pencil 30
-# book 100
-# book
-# eraser
-# pencil
-# margaret
+# 11 3 4
 
 # 出力例1
-# 100
-# 50
-# 30
-# -1
+# 3
