@@ -22,13 +22,3 @@ Paizaで提示されている入力値をペーストする
 ```bash
 % python3 main.py < test-case_mondai__1.txt
 ```
-
-# テストコードの実行
-```bash
-% python3 main.py test
-......
----------------------------
-Ran 6 tests in 0.001s
-
-OK
-```
