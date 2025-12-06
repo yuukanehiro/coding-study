@@ -34,15 +34,22 @@ def main():
     # queries: List[Tuple[int, str]] = [(int(line.split()[0]), line.split()[1]) for line in (input().strip() for _ in range(query_count))]
 
     n, a, b = map(int, input().split())
-
     print(get_answer(n, a, b))
 
 
-answer1 = 3
-assert get_answer(11,3,4) == answer1
+# ------------------------
+# テストコード
+# ------------------------
+def test():
+    answer1 = 3
+    assert get_answer(11,3,4) == answer1
 
 
 if __name__ == '__main__':
+    # テスト
+    test()
+
+    # 本処理
     main()
 
 # Q

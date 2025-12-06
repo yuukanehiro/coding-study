@@ -3,10 +3,12 @@ def get_answer(n: int, a: int, b: int) -> int:
     # 最小値を求めたいので非常に大きい数を入れておく
     dp = [10000000] * (n + 1)
 
+    dp[0] = 0
+
     # 1個の時はa
     dp[1] = a
 
-    for i in range(1, n + 1):
+    for i in range(2, n + 1):
         dp[i] = min(dp[i - 1] + a, dp[i - 2] + b)
 
     return dp[n]
@@ -30,13 +32,13 @@ def main():
 
     print(get_answer(n, a, b))
 
-
-answer1 = 400
-assert get_answer(5, 100, 150) == answer1
-
-
 if __name__ == '__main__':
     main()
+
+    answer1 = 400
+    assert get_answer(5, 100, 150) == answer1
+
+
 
 # Q
 # 最安値を達成するには 1 Python3編（paizaランク B 相当）

@@ -50,11 +50,19 @@ def main():
     print(get_answer(n, a, b))
 
 
-answer1 = 200
-assert get_answer(4, 110, 200) == answer1
+# ------------------------
+# テストコード
+# ------------------------
+def test():
+    answer1 = 200
+    assert get_answer(4, 110, 200) == answer1
 
 
 if __name__ == '__main__':
+    # テスト
+    test()
+
+    # 本処理
     main()
 
 # Q
