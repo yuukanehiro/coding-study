@@ -25,6 +25,11 @@ def main():
     # inputList = list(map(int, input().split()))
     # item_count, query_count = inputList[0], inputList[1]
     # items = [input().strip() for _ in range(item_count)]
+
+    # n回のList[int]
+    # n = int(input().strip())
+    # heights = [int(input().strip()) for _ in range(n)]
+
     # 2次元配列
     # items = [list(map(int, input().split())) for _ in range(item_count)]
     # 1 - indexed
