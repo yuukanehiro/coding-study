@@ -2,12 +2,12 @@
 # 実行方法
 
 ```bash
-cat in.txt | python main.py > result.txt
+cat in.txt | python3 main.py > result.txt
 ```
 
 もしくは
 ```bash
-python main.py < in.txt > result.txt
+python3 main.py < in.txt > result.txt
 ```
 
 # diff expect.txt vs result.txt
