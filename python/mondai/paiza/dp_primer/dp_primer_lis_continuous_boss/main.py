@@ -4,19 +4,16 @@ from typing import List, Dict, Tuple
 # ------------------------
 # を返却
 # ------------------------
-def get_answer(n: int, a: int, b: int) -> int:
-    dp = [0] * (n + 1)
+def get_answer(heights: List[int]) -> int:
+    dp = [1] * len(heights)
 
-    # 0段の時は1通り
-    dp[0] = 1
+    for i in range(1, len(heights)):
+        if heights[i - 1] >= heights[i]:
+            dp[i] = dp[i - 1] + 1
+        else:
+            dp[i] = 1
 
-    for i in range(1, n + 1):
-        if i >= a:
-            dp[i] += dp[i - a]
-        if i >= b:
-            dp[i] += dp[i - b]  
-
-    return dp[n]
+    return max(dp)
 
 
 def main():
@@ -27,8 +24,8 @@ def main():
     # items = [input().strip() for _ in range(item_count)]
 
     # n回のList[int]
-    # n = int(input())
-    # heights = [int(input()) for _ in range(n)]
+    # n = int(input().strip())
+    # heights = [int(input().strip()) for _ in range(n)]
 
     # 2次元配列
     # items = [list(map(int, input().split())) for _ in range(item_count)]
@@ -38,8 +35,9 @@ def main():
     # queries: Dict[int, str] = {int(line.split()[0]): line.split()[1] for line in (input().strip() for _ in range(query_count))}
     # queries: List[Tuple[int, str]] = [(int(line.split()[0]), line.split()[1]) for line in (input().strip() for _ in range(query_count))]
 
-    n, a, b = map(int, input().split())
-    print(get_answer(n, a, b))
+    n = int(input())
+    heights = [int(input()) for _ in range(n)]
+    print(get_answer(heights))
 
 
 # ------------------------
@@ -47,7 +45,8 @@ def main():
 # ------------------------
 def test():
     answer1 = 3
-    assert get_answer(11,3,4) == answer1
+    input1 = [187, 192, 115, 108, 109]
+    assert get_answer(input1) == answer1
 
 
 if __name__ == '__main__':
@@ -58,44 +57,55 @@ if __name__ == '__main__':
     main()
 
 # Q
-# 階段の上り方 2 Python3編（paizaランク B 相当）
+# 【連続列】最長減少連続部分列 Python3編（paizaランク B 相当）
 # 問題にチャレンジして、ユーザー同士で解答を教え合ったり、コードを公開してみよう！
 
 # シェア用URL:
-# https://paiza.jp/works/mondai/dp_primer/dp_primer_stairs_step1
+# https://paiza.jp/works/mondai/dp_primer/dp_primer_lis_continuous_boss
 # 問題文のURLをコピーする
 #  下記の問題をプログラミングしてみよう！
-# 整数 n, a, b が与えられます。
-# 階段を上るのに、1歩で a 段または b 段を上ることができるとき、n 段の階段を上る方法は何通りあるでしょうか。
+# n 人が横一列に並んでいます。左から i 番目の人を人 i と呼ぶことにします。人 i の身長は a_i [cm]です。
 
-# (ヒント)
-# 前問とやることは同じです。ただ、n, a, b の値によっては答えが0になることがあるので注意しましょう。例えば、n = 4, a = 3, b = 5 のとき、答えは0です。(1歩で3段か5段上ることができるとき、ちょうど4段の階段を上る方法は存在しない)
+# 人 l ,人 l+1, ... , 人 r からなる区間 [l, r] について、すべての l ≦ i < r に対して a_i ≧ a_{i+1} が成り立っているとき、区間 [l, r] は逆背の順であると呼ぶことにします。また、区間 [l, r] の長さを r-l+1 とします。
+
+# 逆背の順であるような区間のうち、最長であるものの長さを出力してください。
 
 # ▼　下記解答欄にコードを記入してみよう
 
 # 入力される値
-# n a b
+# n
+# a_1
+# a_2
+# ...
+# a_n
+
+
+# ・ 1行目に、横一列に並んでいる人の人数 n が与えられます。
+
+# ・ 続く n 行のうち i 行目では、人 i の身長 a_i が与えられます。
+
 
 # 入力値最終行の末尾に改行が１つ入ります。
 # 文字列は標準入力から渡されます。 標準入力からの値取得方法はこちらをご確認ください
 # 期待する出力
-# n 段の階段を上る方法の数を1行に出力してください。
+# 逆背の順であるような区間のうち、最長であるものの長さを出力してください。
 
 # また、末尾に改行を入れ、余計な文字、空行を含んではいけません。
 
 # 条件
 # すべてのテストケースにおいて、以下の条件をみたします。
 
-# ・ 1 ≦ n ≦ 40
+# ・ 1 ≦ n ≦ 200,000
 
-# ・ 1 ≦ a ≦ 5
-
-# ・ 1 ≦ b ≦ 5
-
-# ・ a ≠ b
+# ・ 100 ≦ a_i ≦ 200
 
 # 入力例1
-# 11 3 4
+# 5
+# 187
+# 192
+# 115
+# 108
+# 109
 
 # 出力例1
 # 3
