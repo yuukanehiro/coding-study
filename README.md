@@ -2,13 +2,13 @@
 
 コーディングテスト学習用
 
-# 実行例
+## 実行方法
 
 ```bash
 python3 main.py < in.txt > out.txt
 ```
 
-# diff expect.txt vs out.txt
+### diff expect.txt vs out.txt
 
 ```bash
 diff expect.txt out.txt
