@@ -1,7 +1,20 @@
 
-nums = ["a", "b", "c", "d", "e"]
+nums1 = ["a", "b", "c", "d", "e"]
 
-for i, v in enumerate(nums):
+for v in nums1:
+    print(v)
+
+# Output:
+# a
+# b
+# c
+# d
+# e
+
+
+nums2 = ["a", "b", "c", "d", "e"]
+
+for i, v in enumerate(nums2):
     print(f"i: {i}, v:{v}")
 
 # Output:
