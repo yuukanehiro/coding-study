@@ -2,23 +2,22 @@
 
 コーディングテスト学習用
 
-
 # 実行例
 
-## 入力値が少ない場合
 ```bash
-% python3 main.py
-
-Paizaで提示されている入力値をペーストする
+python3 main.py < in.txt > out.txt
 ```
 
-## 入力値が多い場合
+# diff expect.txt vs out.txt
 
-テキストファイルに入力値を保存して実行する
 ```bash
-% cat test-case_mondai__1.txt | python3 main.py > result.txt
+diff expect.txt out.txt
 ```
-もしくは
-```bash
-% python3 main.py < test-case_mondai__1.txt
-```
+
+## VScode
+
+### macOS
+
+- 「command & shift & p」を押す
+- 「compare」と入力し、「File: Compare Active File With...」を選択
+- out.txtとexpect.txtを比較

@@ -22,4 +22,4 @@ diff expect.txt out.txt
 
 - 「command & shift & p」を押す
 - 「compare」と入力し、「File: Compare Active File With...」を選択
-- out.txtとout.txtを比較
+- out.txtとexpect.txtを比較
