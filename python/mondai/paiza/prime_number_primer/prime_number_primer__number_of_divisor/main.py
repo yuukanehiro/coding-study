@@ -1,22 +1,28 @@
 from collections import defaultdict
-from typing import List, Dict, Tuple
 
 # ------------------------
-# を返却
+# 約数の合計を返却
+# 整数 N をN = (p^n)(q^m)(r^l)... と素因数分解できるとき、約数の個数は(n+1)(m+1)(l+1)...となります。
 # ------------------------
-def get_answer(n: int, a: int, b: int) -> int:
-    dp = [0] * (n + 1)
+def get_answer(n: int) -> int:
+    primers = defaultdict(int)
 
-    # 0段の時は1通り
-    dp[0] = 1
+    for i in range(2, int(n ** 0.5) + 1):
+        while n % i == 0:
+            primers[i] += 1
 
-    for i in range(1, n + 1):
-        if i >= a:
-            dp[i] += dp[i - a]
-        if i >= b:
-            dp[i] += dp[i - b]  
+            n //= i
 
-    return dp[n]
+    if n > 1:
+        primers[n] += 1
+
+    # 掛け算なので初期値1
+    res = 1
+    for k, v in primers.items():
+        res *= v + 1
+
+    return res
+
 
 
 def main():
@@ -38,22 +44,21 @@ def main():
     # queries: Dict[int, str] = {int(line.split()[0]): line.split()[1] for line in (input().strip() for _ in range(query_count))}
     # queries: List[Tuple[int, str]] = [(int(line.split()[0]), line.split()[1]) for line in (input().strip() for _ in range(query_count))]
 
-    n, a, b = map(int, input().split())
-    print(get_answer(n, a, b))
+    n = int(input())
+    print(get_answer(n))
 
 
 # ------------------------
 # テストコード
 # ------------------------
 def test():
-    in1 = [
-        11,
-        3,
-        4
-    ]
-    answer1 = 3
+    in1 = 15
+    answer1 = 4
     assert get_answer(in1) == answer1
 
+    in2 = 100
+    answer2 = 9
+    assert get_answer(in2) == answer2
 
 if __name__ == '__main__':
     # テスト
@@ -63,44 +68,43 @@ if __name__ == '__main__':
     main()
 
 # Q
-# 階段の上り方 2 Python3編（paizaランク B 相当）
+# 約数の個数 Python3編（paizaランク C 相当）
 # 問題にチャレンジして、ユーザー同士で解答を教え合ったり、コードを公開してみよう！
 
 # シェア用URL:
-# https://paiza.jp/works/mondai/dp_primer/dp_primer_stairs_step1
+# https://paiza.jp/works/mondai/prime_number_primer/prime_number_primer__number_of_divisor
 # 問題文のURLをコピーする
 #  下記の問題をプログラミングしてみよう！
-# 整数 n, a, b が与えられます。
-# 階段を上るのに、1歩で a 段または b 段を上ることができるとき、n 段の階段を上る方法は何通りあるでしょうか。
-
-# (ヒント)
-# 前問とやることは同じです。ただ、n, a, b の値によっては答えが0になることがあるので注意しましょう。例えば、n = 4, a = 3, b = 5 のとき、答えは0です。(1歩で3段か5段上ることができるとき、ちょうど4段の階段を上る方法は存在しない)
+# 整数 N が与えられるので、N の約数が何個あるかを求めましょう。
+# なお、ある整数 N の約数の個数は、N を素因数分解したときに現れる全ての{素数の累乗 + 1} の積であることが知られています。
+# よって、整数 N をN = (p^n)(q^m)(r^l)... と素因数分解できるとき、約数の個数は(n+1)(m+1)(l+1)...となります。
+# 例として、12 の約数の個数は 12 = 2^2 × 3^1 より、(2+1)×(1+1) = 6 個と求まります。
 
 # ▼　下記解答欄にコードを記入してみよう
 
 # 入力される値
-# n a b
+# N
+
+
+# ・ 1 行で整数 N が与えられます。
 
 # 入力値最終行の末尾に改行が１つ入ります。
 # 文字列は標準入力から渡されます。 標準入力からの値取得方法はこちらをご確認ください
 # 期待する出力
-# n 段の階段を上る方法の数を1行に出力してください。
-
-# また、末尾に改行を入れ、余計な文字、空行を含んではいけません。
+# N の約数の個数を 1 行で出力してください。
+# 出力の末尾には改行を入れてください。
 
 # 条件
-# すべてのテストケースにおいて、以下の条件をみたします。
-
-# ・ 1 ≦ n ≦ 40
-
-# ・ 1 ≦ a ≦ 5
-
-# ・ 1 ≦ b ≦ 5
-
-# ・ a ≠ b
+# ・ 1 ≦ N ≦ 100,000
 
 # 入力例1
-# 11 3 4
+# 15
 
 # 出力例1
-# 3
+# 4
+
+# 入力例2
+# 100
+
+# 出力例2
+# 9
