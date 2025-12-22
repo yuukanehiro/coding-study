@@ -1,5 +1,5 @@
-from collections import defaultdict
-from typing import List, Dict, Tuple
+# from collections import defaultdict
+# from typing import List, Dict, Tuple
 
 # ------------------------
 # を返却
