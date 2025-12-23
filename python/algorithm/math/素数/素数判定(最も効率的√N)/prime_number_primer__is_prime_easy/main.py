@@ -13,14 +13,16 @@ def is_primer(n: int):
         return False
     if n == 2:
         return True
+    
+    # 2以外の偶数はFalse
     if n % 2 == 0:
         return False
 
-    i = 3
-    while i * i <= n:
+    # 2以外は偶数の素数は存在しない。
+    # √nの範囲 and 奇数のみを効率よく探索    
+    for i in range(3, int(n ** 0.5) + 1, 2):
         if n % i == 0:
             return False
-        i += 2
 
     return True
 
