@@ -1,4 +1,12 @@
 
+# 型
+# list[list[int]]
+# [
+#   [0],
+#   [1, 2, 3],
+#   [4, 5, 6],
+#   [],
+# ]
 
 twoDArray = [[0] * 2 for _ in range(3)]
 print(twoDArray) # Output: [[0, 0], [0, 0], [0, 0]]
