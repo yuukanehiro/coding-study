@@ -1,75 +1,30 @@
 
 
-def get_answer(a: int, b: int, xs: list[int], qs: list[int]) -> tuple[list[str], list[list[int]]]:
-    table = [[] for _ in range(100)]
-
-    for x in xs:
-        hash = (a * x + b) % 100
-        table[hash].append(x)
-
-    ans: list[str] = []
-    for x in qs:
-        hash = (a * x + b) % 100
-        if x in table[hash]:
-            ans.append("Yes")
-        else:
-            ans.append("No")
-
-    return ans, table
-    
-
 def main():
     a, b = map(int, input().split())
     n = int(input())
 
+    table = [[] for _ in range(100)]
     xs: list[int] = []
     qs: list[int] = []
     for _ in range(n):
         tmp = list(map(int, input().split()))
+        hash = (a * tmp[1] + b) % 100
+
         if tmp[0] == 1:
-            xs.append(tmp[1])
+            table[hash].append(tmp[1])
         elif tmp[0] == 2:
-            qs.append(tmp[1])
+            if tmp[1] in table[hash]:
+                print("Yes")
+            else:
+                print("No")
         else:
             exit("panic")
-
-    ans, table = get_answer(a, b, xs, qs)
-    for i in ans:
-        print(i)
 
     for t in table:
         print(" ".join(map(str, t)))
 
-
-def test():
-    in_a1 = 17
-    in_b1 = 13
-    in_xs1 = [
-        1,
-        2,
-        3,
-        4,
-        5,
-    ]
-    in_qs1 = [
-        4,
-        7,
-        2,
-        1,
-        6,
-    ]
-    expect1 = [
-        "Yes",
-        "No",
-        "Yes",
-        "Yes",
-        "No"
-    ]
-    ans1, _ = get_answer(in_a1, in_b1, in_xs1, in_qs1)
-    assert ans1 == expect1
-
 main()
-test()
 
 # Q
 # ハッシュテーブルを使おう Python3編（paizaランク C 相当）
