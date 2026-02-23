@@ -14,3 +14,7 @@
 * [クイックソート](https://www.youtube.com/watch?v=5UqHsN6GUtc)
 * [マージソート](https://www.youtube.com/watch?v=9pB5oZeD4gA)
 * [ヒープソート](https://www.momoyama-usagi.com/entry/heap-sort)
+
+# 動画
+
+* [Sorting strategies](https://www.youtube.com/playlist?list=PLcX11VWS1PdA4dSPip8-1JfKxFa32X53y)
